@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박준화 - 자기소개서</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .page {
+            display: none;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s ease-in-out;
+        }
+        .active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .nav-button {
+            @apply px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full shadow-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105;
+            position: relative;
+            overflow: hidden;
+        }
+        .nav-button.active-nav {
+            @apply from-indigo-600 to-purple-600 shadow-xl;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+        }
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.6s ease-out;
+            transform: translate(-50%, -50%);
+        }
+        .nav-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        .progress-bar {
+            height: 8px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        .skill-item {
+            @apply bg-gradient-to-r from-gray-50 to-white p-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-300;
+        }
+        .skill-item:hover {
+            transform: translateY(-2px);
+        }
+        .timeline-item {
+            @apply relative pl-8 pb-8;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+            border-radius: 10px;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 8px;
+            width: 15px;
+            height: 15px;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .floating-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 20px 0;
+        }
+        .stats-card {
+            @apply bg-gradient-to-br from-blue-50 to-indigo-100 p-6 rounded-2xl shadow-lg;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+        .hobby-card {
+            @apply bg-gradient-to-br p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300;
+        }
+        .hobby-1 { @apply from-green-100 to-emerald-200; }
+        .hobby-2 { @apply from-pink-100 to-rose-200; }
+        .hobby-3 { @apply from-red-100 to-orange-200; }
+        .hobby-4 { @apply from-purple-100 to-violet-200; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-blue-50 text-gray-800 min-h-screen">
+    <header class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white py-16 shadow-2xl relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-10"></div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="floating-animation">
+                <div class="w-32 h-32 mx-auto mb-6 bg-white rounded-full shadow-2xl flex items-center justify-center">
+                    <i class="fas fa-user-tie text-6xl text-indigo-600"></i>
+                </div>
+            </div>
+            <h1 class="text-5xl font-black mb-3">박준화</h1>
+            <p class="text-xl font-light opacity-90">재난안전소방학과 | 미래의 안전 전문가</p>
+            <div class="mt-6 flex justify-center space-x-4">
+                <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                    <i class="fas fa-graduation-cap mr-2"></i>건양대학교 3학년
+                </div>
+                <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
+                    <i class="fas fa-map-marker-alt mr-2"></i>충청북도 청주
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="flex justify-center space-x-3 my-8 px-4">
+        <button onclick="showPage(1)" class="nav-button active-nav" id="nav1">
+            <i class="fas fa-id-card mr-2"></i>인적사항
+        </button>
+        <button onclick="showPage(2)" class="nav-button" id="nav2">
+            <i class="fas fa-heart mr-2"></i>취미
+        </button>
+        <button onclick="showPage(3)" class="nav-button" id="nav3">
+            <i class="fas fa-fire-extinguisher mr-2"></i>전공
+        </button>
+        <button onclick="showPage(4)" class="nav-button" id="nav4">
+            <i class="fas fa-seedling mr-2"></i>미래 계획
+        </button>
+    </nav>
+
+    <!-- 페이지 1: 인적사항 -->
+    <section id="page1" class="page active py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- 기본 정보 -->
+                <div class="bg-white p-8 rounded-2xl shadow-xl card-hover">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">
+                        <i class="fas fa-id-card mr-3"></i>기본 정보
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-user text-blue-600 mr-4 w-6"></i>
+                            <span class="font-semibold mr-3">이름:</span>
+                            <span>박준화</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-birthday-cake text-pink-500 mr-4 w-6"></i>
+                            <span class="font-semibold mr-3">나이:</span>
+                            <span>24세</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-map-marker-alt text-green-600 mr-4 w-6"></i>
+                            <span class="font-semibold mr-3">출생지:</span>
+                            <span>충청북도 청주</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-university text-purple-600 mr-4 w-6"></i>
+                            <span class="font-semibold mr-3">학력:</span>
+                            <span>건양대학교 재난안전소방학과 3학년</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-phone text-yellow-600 mr-4 w-6"></i>
+                            <span class="font-semibold mr-3">전화:</span>
+                            <span>010-2244-0724</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-envelope text-red-500 mr-4 w-6"></i>
+                            <span class="font-semibold mr-3">이메일:</span>
+                            <span>wnshgk0724@naver.com</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 개인 역량 차트 -->
+                <div class="bg-white p-8 rounded-2xl shadow-xl card-hover">
+                    <h3 class="text-2xl font-bold mb-6 gradient-text">
+                        <i class="fas fa-chart-bar mr-3"></i>개인 역량
+                    </h3>
+                    <div class="chart-container">
+                        <canvas id="skillChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 학업 성취도 -->
+            <div class="mt-8 bg-white p-8 rounded-2xl shadow-xl card-hover">
+                <h3 class="text-2xl font-bold mb-6 gradient-text">
+                    <i class="fas fa-trophy mr-3"></i>핵심 역량 지수
+                </h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="stats-card text-center">
+                        <div class="text-3xl font-bold text-blue-600 mb-2">85%</div>
+                        <div class="text-sm text-gray-600 mb-3">체력 관리</div>
+                        <div class="progress-bar" style="width: 85%"></div>
+                    </div>
+                    <div class="stats-card text-center">
+                        <div class="text-3xl font-bold text-purple-600 mb-2">92%</div>
+                        <div class="text-sm text-gray-600 mb-3">학업 성취</div>
+                        <div class="progress-bar" style="width: 92%"></div>
+                    </div>
+                    <div class="stats-card text-center">
+                        <div class="text-3xl font-bold text-green-600 mb-2">88%</div>
+                        <div class="text-sm text-gray-600 mb-3">리더십</div>
+                        <div class="progress-bar" style="width: 88%"></div>
+                    </div>
+                    <div class="stats-card text-center">
+                        <div class="text-3xl font-bold text-pink-600 mb-2">90%</div>
+                        <div class="text-sm text-gray-600 mb-3">소통 능력</div>
+                        <div class="progress-bar" style="width: 90%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 페이지 2: 취미 -->
+    <section id="page2" class="page py-12">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold gradient-text mb-4">
+                    <i class="fas fa-heart mr-3"></i>취미 & 관심사
+                </h2>
+                <p class="text-gray-600 text-lg">다양한 분야에 대한 관심으로 균형잡힌 성장을 추구합니다</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="hobby-card hobby-1">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-chart-line text-3xl text-green-600 mr-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800">경제/주식 관련 책 읽기</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">미래를 대비한 경제적 사고력과 투자 마인드를 기르기 위해 꾸준히 경제 서적을 읽고 있습니다.</p>
+                    <div class="flex items-center text-sm text-gray-600">
+                        <i class="fas fa-clock mr-2"></i>
+                        <span>주 3-4회, 매회 1-2시간</span>
+                    </div>
+                </div>
+
+                <div class="hobby-card hobby-2">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-music text-3xl text-pink-600 mr-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800">노래 듣기</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">다양한 장르의 음악을 통해 감성을 풍부하게 하고 스트레스를 해소합니다.</p>
+                    <div class="flex items-center text-sm text-gray-600">
+                        <i class="fas fa-clock mr-2"></i>
+                        <span>일상 속 지속적으로</span>
+                    </div>
+                </div>
+
+                <div class="hobby-card hobby-3">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-dumbbell text-3xl text-red-600 mr-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800">운동을 통한 체력 관리</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">소방관을 목표로 하는 만큼 꾸준한 체력 훈련을 통해 신체적 역량을 강화하고 있습니다.</p>
+                    <div class="flex items-center text-sm text-gray-600">
+                        <i class="fas fa-clock mr-2"></i>
+                        <span>주 4-5회, 매회 1.5시간</span>
+                    </div>
+                </div>
+
+                <div class="hobby-card hobby-4">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-tv text-3xl text-purple-600 mr-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800">애니메이션 시청</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">특히 <strong>사이버 펑크: 엣지러너</strong>를 통해 미래 사회에 대한 통찰과 상상력을 기르고 있습니다.</p>
+                    <div class="flex items-center text-sm text-gray-600">
+                        <i class="fas fa-clock mr-2"></i>
+                        <span>주말 여가시간</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 관심도 차트 -->
+            <div class="bg-white p-8 rounded-2xl shadow-xl card-hover">
+                <h3 class="text-2xl font-bold mb-6 gradient-text text-center">
+                    <i class="fas fa-pie-chart mr-3"></i>취미별 관심도 & 시간 투자
+                </h3>
+                <div class="chart-container">
+                    <canvas id="hobbyChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 페이지 3: 전공소개 -->
+    <section id="page3" class="page py-12">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold gradient-text mb-4">
+                    <i class="fas fa-fire-extinguisher mr-3"></i>재난안전소방학과
+                </h2>
+                <p class="text-gray-600 text-lg">안전한 사회를 만드는 전문가로 성장하기 위한 여정</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                <!-- 전공 소개 -->
+                <div class="bg-white p-8 rounded-2xl shadow-xl card-hover">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800">
+                        <i class="fas fa-graduation-cap mr-3 text-blue-600"></i>전공 개요
+                    </h3>
+                    <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                        재난안전소방학과는 다양한 재난 상황에 대한 이론과 실무 능력을 기르며, 화재 예방, 대응 체계, 응급처치, 안전관리 등을 종합적으로 학습하는 학문입니다.
+                        위기 상황에서도 침착하게 판단하고 행동할 수 있는 전문가로 성장하기 위해 실습과 이론을 병행하며 학업에 임하고 있습니다.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-red-50 p-4 rounded-lg text-center">
+                            <i class="fas fa-fire text-2xl text-red-600 mb-2"></i>
+                            <div class="font-semibold text-gray-800">화재 진압</div>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg text-center">
+                            <i class="fas fa-shield-alt text-2xl text-blue-600 mb-2"></i>
+                            <div class="font-semibold text-gray-800">재난 대응</div>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg text-center">
+                            <i class="fas fa-first-aid text-2xl text-green-600 mb-2"></i>
+                            <div class="font-semibold text-gray-800">응급처치</div>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg text-center">
+                            <i class="fas fa-search text-2xl text-purple-600 mb-2"></i>
+                            <div class="font-semibold text-gray-800">화재조사</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 학습 진도 차트 -->
+                <div class="bg-white p-8 rounded-2xl shadow-xl card-hover">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800">
+                        <i class="fas fa-chart-line mr-3 text-indigo-600"></i>학습 성취도
+                    </h3>
+                    <div class="chart-container">
+                        <canvas id="subjectChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 수강 과목 타임라인 -->
+            <div class="bg-white p-8 rounded-2xl shadow-xl card-hover">
+                <h3 class="text-2xl font-bold mb-8 gradient-text">
+                    <i class="fas fa-book-open mr-3"></i>주요 수강 과목 현황
+                </h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="timeline-item">
+                            <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg">
+                                <h4 class="font-bold text-blue-800 mb-2">방재영상처리</h4>
+                                <p class="text-sm text-gray-600">재난 상황의 영상 분석 및 처리 기술 학습</p>
+                                <div class="mt-2">
+                                    <div class="progress-bar" style="width: 90%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="bg-gradient-to-r from-red-50 to-red-100 p-4 rounded-lg">
+                                <h4 class="font-bold text-red-800 mb-2">소방경보시스템</h4>
+                                <p class="text-sm text-gray-600">화재 감지 및 경보 시스템의 구조와 운영</p>
+                                <div class="mt-2">
+                                    <div class="progress-bar" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg">
+                                <h4 class="font-bold text-orange-800 mb-2">화재조사론</h4>
+                                <p class="text-sm text-gray-600">화재 원인 규명 및 조사 방법론</p>
+                                <div class="mt-2">
+                                    <div class="progress-bar" style="width: 88%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="timeline-item">
+                            <div class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg">
+                                <h4 class="font-bold text-green-800 mb-2">응급처치</h4>
+                                <p class="text-sm text-gray-600">생명 구조를 위한 응급처치 실무</p>
+                                <div class="mt-2">
+                                    <div class="progress-bar" style="width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg">
+                                <h4 class="font-bold text-purple-800 mb-2">소방관수로특론</h4>
+                                <p class="text-sm text-gray-600">소방 급수 시설 및 관수로 시스템</p>
+                                <div class="mt-2">
+                                    <div class="progress-bar" style="width: 82%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="bg-gradient-to-r from-indigo-50 to-indigo-100 p-4 rounded-lg">
+                                <h4 class="font-bold text-indigo-800 mb-2">캡스톤디자인</h4>
+                                <p class="text-sm text-gray-600">창의적 설계 프로젝트 수행</p>
+                                <div class="mt-2">
+                                    <div class="progress-bar" style="width: 78%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 페이지 4: 미래 계획 -->
+    <section id="page4" class="page py-12">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold gradient-text mb-4">
+                    <i class="fas fa-seedling mr-3"></i>미래 비전 & 계획
+                </h2>
+                <p class="text-gray-600 text-lg">안전한 사회를 만드는 소방공무원으로서의 성장 로드맵</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                <!-- 미래 계획 -->
+                <div class="bg-white p-8 rounded-2xl shadow-xl card-hover">
+                    <h3 class="text-2xl font-bold mb-6 gradient-text">
+                        <i class="fas fa-target mr-3"></i>핵심 목표
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg">
+                            <h4 class="font-bold text-blue-800 mb-2">
+                                <i class="fas fa-fire-extinguisher mr-2"></i>소방공무원 합격
+                            </h4>
+                            <p class="text-gray-700">체력 향상과 정신력 강화를 통한 소방관 시험 준비</p>
+                        </div>
+                        <div class="p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-lg">
+                            <h4 class="font-bold text-green-800 mb-2">
+                                <i class="fas fa-chart-line mr-2"></i>경제적 역량 강화
+                            </h4>
+                            <p class="text-gray-700">경제 지식 습득과 재테크 역량 개발</p>
+                        </div>
+                        <div class="p-4 bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg">
+                            <h4 class="font-bold text-purple-800 mb-2">
+                                <i class="fas fa-users mr-2"></i>사회 기여
+                            </h4>
+                            <p class="text-gray-700">국민의 안전을 지키는 신뢰받는 전문가로 성장</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 목표 달성 진행률 -->
+                <div class="bg-white p-8 rounded-2xl shadow-xl card-hover">
+                    <h3 class="text-2xl font-bold mb-6 gradient-text">
+                        <i class="fas fa-trophy mr-3"></i>목표 달성률
+                    </h3>
+                    <div class="chart-container">
+                        <canvas id="goalChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 상세 계획 및 비전 -->
+            <div class="bg-white p-8 rounded-2xl shadow-xl card-hover">
+                <h3 class="text-2xl font-bold mb-6 gradient-text">
+                    <i class="fas fa-road mr-3"></i>상세 실행 계획
+                </h3>
+                <div class="prose max-w-none">
+                    <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                        현재 소방관을 목표로 준비하고 있으며, 체력 향상과 정신력 강화를 위한 노력을 꾸준히 해나가고 있습니다.
+                        동시에 경제 관련 지식도 함께 습득하며, 미래를 위한 재테크 역량 또한 키워나가고 있습니다.
+                    </p>
+                    <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                        단순한 직업이 아닌, 사회에 실질적으로 기여하는 안전 전문가로 성장하고자 합니다.
+                        앞으로도 꾸준한 실천과 학습을 통해 실력과 인성을 갖춘 소방공무원이 되어, 위기 상황에서 국민들에게 신뢰와 안정을 줄 수 있는 존재가 되겠습니다.
+                    </p>
+                </div>
+
+                <!-- 실행 로드맵 -->
+                <div class="mt-8">
+                    <h4 class="text-xl font-bold mb-6 text-gray-800">
+                        <i class="fas fa-calendar-alt mr-2"></i>실행 로드맵
+                    </h4>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-xl text-center">
+                            <i class="fas fa-running text-3xl text-red-600 mb-3"></i>
+                            <h5 class="font-bold text-red-800 mb-2">단기 목표 (6개월)</h5>
+                            <ul class="text-sm text-gray-700 text-left">
+                                <li>• 체력 시험 기준 달성</li>
+                                <li>• 전공 과목 성적 향상</li>
+                                <li>• 소방 관련 자격증 취득</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl text-center">
+                            <i class="fas fa-graduation-cap text-3xl text-blue-600 mb-3"></i>
+                            <h5 class="font-bold text-blue-800 mb-2">중기 목표 (1-2년)</h5>
+                            <ul class="text-sm text-gray-700 text-left">
+                                <li>• 대학 졸업</li>
+                                <li>• 소방공무원 시험 합격</li>
+                                <li>• 전문 지식 심화 학습</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl text-center">
+                            <i class="fas fa-star text-3xl text-green-600 mb-3"></i>
+                            <h5 class="font-bold text-green-800 mb-2">장기 비전 (5년+)</h5>
+                            <ul class="text-sm text-gray-700 text-left">
+                                <li>• 전문 소방관으로 성장</li>
+                                <li>• 지역사회 안전 기여</li>
+                                <li>• 후배 양성 및 멘토링</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-lg font-semibold mb-2">박준화 자기소개서</p>
+            <p class="text-gray-300">미래의 안전 전문가로 성장하겠습니다</p>
+            <div class="mt-4 flex justify-center space-x-6">
+                <span><i class="fas fa-phone mr-2"></i>010-2244-0724</span>
+                <span><i class="fas fa-envelope mr-2"></i>wnshgk0724@naver.com</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showPage(pageNumber) {
+            // 모든 페이지 숨기기
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // 모든 네비게이션 버튼 비활성화
+            document.querySelectorAll('.nav-button').forEach(btn => {
+                btn.classList.remove('active-nav');
+            });
+            
+            // 선택된 페이지 표시
+            setTimeout(() => {
+                document.getElementById('page' + pageNumber).classList.add('active');
+            }, 100);
+            
+            // 선택된 네비게이션 버튼 활성화
+            document.getElementById('nav' + pageNumber).classList.add('active-nav');
+        }
+
+        // 차트 초기화
+        window.addEventListener('load', function() {
+            // 개인 역량 차트
+            const skillCtx = document.getElementById('skillChart').getContext('2d');
+            new Chart(skillCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['체력', '의사소통', '리더십', '문제해결', '전문지식', '책임감'],
+                    datasets: [{
+                        label: '현재 역량',
+                        data: [85, 90, 88, 82, 92, 95],
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgb(59, 130, 246)',
+                        pointBackgroundColor: 'rgb(59, 130, 246)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(59, 130, 246)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    }
+                }
+            });
+
+            // 취미 관심도 차트
+            const hobbyCtx = document.getElementById('hobbyChart').getContext('2d');
+            new Chart(hobbyCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['경제/주식', '음악', '운동', '애니메이션'],
+                    datasets: [{
+                        data: [30, 20, 35, 15],
+                        backgroundColor: [
+                            'rgb(34, 197, 94)',
+                            'rgb(236, 72, 153)',
+                            'rgb(239, 68, 68)',
+                            'rgb(147, 51, 234)'
+                        ],
+                        borderWidth: 3,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 전공 성취도 차트
+            const subjectCtx = document.getElementById('subjectChart').getContext('2d');
+            new Chart(subjectCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['방재영상처리', '소방경보시스템', '화재조사론', '응급처치', '소방관수로', '캡스톤디자인'],
+                    datasets: [{
+                        label: '학습 진도율 (%)',
+                        data: [90, 85, 88, 95, 82, 78],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.8)',
+                            'rgba(239, 68, 68, 0.8)',
+                            'rgba(251, 146, 60, 0.8)',
+                            'rgba(34, 197, 94, 0.8)',
+                            'rgba(147, 51, 234, 0.8)',
+                            'rgba(99, 102, 241, 0.8)'
+                        ],
+                        borderRadius: 8,
+                        borderSkipped: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                maxRotation: 45
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 목표 달성률 차트
+            const goalCtx = document.getElementById('goalChart').getContext('2d');
+            new Chart(goalCtx, {
+                type: 'polarArea',
+                data: {
+                    labels: ['체력 준비', '학업 성취', '경제 지식', '사회 기여 준비'],
+                    datasets: [{
+                        data: [75, 85, 70, 65],
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.7)',
+                            'rgba(59, 130, 246, 0.7)',
+                            'rgba(34, 197, 94, 0.7)',
+                            'rgba(147, 51, 234, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgb(239, 68, 68)',
+                            'rgb(59, 130, 246)',
+                            'rgb(34, 197, 94)',
+                            'rgb(147, 51, 234)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
